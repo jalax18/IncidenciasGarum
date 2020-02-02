@@ -26,7 +26,7 @@ namespace IncidenciasGarum.Controllers
 
 
             }
-            return Ok(ficherosgarumclass);
+            return Ok(ficherosgarumclass.Nombre_Fichero);
             
         }
         
