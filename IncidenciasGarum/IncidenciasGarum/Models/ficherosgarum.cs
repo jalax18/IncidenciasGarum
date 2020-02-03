@@ -19,5 +19,6 @@ namespace IncidenciasGarum.Models
         public Nullable<System.DateTime> Fecha_Fichero { get; set; }
         public string Nombre_Estacion { get; set; }
         public string Nombre_Fichero { get; set; }
+        public string TPV { get; set; }
     }
 }

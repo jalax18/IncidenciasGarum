@@ -19,14 +19,15 @@ namespace IncidenciasGarum.Controllers
                 var Oincidencia = new Models.ficherosgarum();
                 Oincidencia.Fecha_Estudio = ficherosgarumclass.Fecha_Estudio;
                 Oincidencia.Fecha_Fichero = ficherosgarumclass.Fecha_Fichero;
-                Oincidencia.Nombre_Estacion = ficherosgarumclass.Nombre_Fichero;
+                Oincidencia.Nombre_Estacion = ficherosgarumclass.Nombre_Estacion;
                 Oincidencia.Nombre_Fichero = ficherosgarumclass.Nombre_Fichero;
+                Oincidencia.TPV = ficherosgarumclass.TPV;
                 db.ficherosgarums.Add(Oincidencia);
                 db.SaveChanges();
 
 
             }
-            return Ok(ficherosgarumclass.Nombre_Fichero);
+            return Ok(ficherosgarumclass);
             
         }
         
