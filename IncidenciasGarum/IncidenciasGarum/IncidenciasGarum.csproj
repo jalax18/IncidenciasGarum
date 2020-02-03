@@ -206,8 +206,8 @@
     <Content Include="Global.asax" />
     <Content Include="Models\FicherosGarumModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FicherosGarumModel.Context.cs</LastGenOutput>
       <DependentUpon>FicherosGarumModel.edmx</DependentUpon>
+      <LastGenOutput>FicherosGarumModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\FicherosGarumModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
