@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IncidenciasGarum", "Inciden
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevisionFicherosGarumForm", "RevisionFicherosGarumForm\RevisionFicherosGarumForm.csproj", "{654027D5-7EE6-4FED-BFB5-C6CE030AA729}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{CF02D66B-B071-4B42-A84D-F951A98044F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{654027D5-7EE6-4FED-BFB5-C6CE030AA729}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{654027D5-7EE6-4FED-BFB5-C6CE030AA729}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{654027D5-7EE6-4FED-BFB5-C6CE030AA729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF02D66B-B071-4B42-A84D-F951A98044F3}.Debug|Any CPU.ActiveCfg = Debug
+		{CF02D66B-B071-4B42-A84D-F951A98044F3}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

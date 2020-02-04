@@ -32,9 +32,9 @@ namespace RevisionFicherosGarumForm
                 ProcessFile(fileName,fecha_comparativa,TPV);
 
             // Recurse into subdirectories of this directory.
-            string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-            foreach (string subdirectory in subdirectoryEntries)
-                ProcessDirectory(subdirectory,fecha_comparativa,TPV);
+           // string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+           // foreach (string subdirectory in subdirectoryEntries)
+             //   ProcessDirectory(subdirectory,fecha_comparativa,TPV);
         }
 
         // Insert logic for processing found files here.
