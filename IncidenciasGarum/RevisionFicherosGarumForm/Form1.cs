@@ -22,10 +22,28 @@ namespace RevisionFicherosGarumForm
             InitializeComponent();
         }
 
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            MessageBox.Show("");
+            DialogResult dialogo = MessageBox.Show("¿Desea cerrar el programa?",
+                       "Cerrar el programa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogo == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
+        }
+
         // Process all files in the directory passed in, recurse on any directories 
         // that are found, and process the files they contain.
         public void ProcessDirectory(string targetDirectory,string fecha_comparativa,string TPV)
         {
+            textBox7.Text = textBox7.Text + "Procesando Directorio: " + targetDirectory+"\r\n";
             // Process the list of files found in the directory.
             string[] fileEntries = Directory.GetFiles(targetDirectory);
             foreach (string fileName in fileEntries)
@@ -42,23 +60,29 @@ namespace RevisionFicherosGarumForm
         {
             string resultado = "";
             //    if (File.GetCreationTime(path) < Convert.ToDateTime("2019-10-01 00:00:00"))
+            textBox7.Text = textBox7.Text + "Procesando Fichero: " + path+"\r\n";
 
             if (File.GetCreationTime(path) < Convert.ToDateTime(fecha_comparativa))
-                {
-               // MessageBox.Show(path+" "+ File.GetCreationTime(path).ToString());
+            {
+                // MessageBox.Show(path+" "+ File.GetCreationTime(path).ToString());
                 FicherosGarumclass nuevaincidencia = new FicherosGarumclass();
                 nuevaincidencia.Fecha_Estudio = DateTime.Now;
                 nuevaincidencia.Fecha_Fichero = File.GetCreationTime(path);
                 nuevaincidencia.Nombre_Estacion = textBox14.Text;
                 nuevaincidencia.Nombre_Fichero = path;
                 nuevaincidencia.TPV = TPV;
-                string url = textBox6.Text.Trim()+"api/ficherosgarum";
+                string url = textBox6.Text.Trim() + "api/ficherosgarum";
                 resultado = Send<FicherosGarumclass>(url, nuevaincidencia, "POST");
-                textBox7.Text = textBox7.Text + resultado + "\r\n";
+                textBox7.Text = textBox7.Text + "Resultado Fichero KO: "  + "\r\n";
+                //textBox7.Text = textBox7.Text + resultado + "\r\n";
                 // MessageBox.Show(resultado);
 
 
                 // aqui grabamos el post en base de datos
+            }
+            else
+            {
+                textBox7.Text = textBox7.Text + "Fichero OK: " + "\r\n";
             }
                 //Convert.ToDateTime(Convert.ToString(DateTime.Now).Substring(0, 10).Trim() + " 00:00:00");
             //MessageBox.Show();
@@ -608,7 +632,13 @@ namespace RevisionFicherosGarumForm
 
         }
 
-
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes == MessageBox.Show("Desea Cerrar la aplicacion?", "Aviso", MessageBoxButtons.YesNo))
+            {
+                this.Close();
+            }
+        }
     }
 
 }
