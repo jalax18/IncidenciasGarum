@@ -23,106 +23,121 @@ namespace RevisionFicherosGarumForm
         }
 
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
 
-            MessageBox.Show("");
-            DialogResult dialogo = MessageBox.Show("¿Desea cerrar el programa?",
-                       "Cerrar el programa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dialogo == DialogResult.No)
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                e.Cancel = false;
-            }
-        }
+
+
 
         // Process all files in the directory passed in, recurse on any directories 
         // that are found, and process the files they contain.
-        public void ProcessDirectory(string targetDirectory,string fecha_comparativa,string TPV)
+        public void ProcessDirectory(string targetDirectory, string fecha_comparativa, string TPV)
         {
-            textBox7.Text = textBox7.Text + "Procesando Directorio: " + targetDirectory+"\r\n";
-            // Process the list of files found in the directory.
-            string[] fileEntries = Directory.GetFiles(targetDirectory);
-            foreach (string fileName in fileEntries)
-                ProcessFile(fileName,fecha_comparativa,TPV);
+            try
+            {
+
+                textBox7.Text = textBox7.Text + DateTime.Now.ToString() + "Procesando Directorio: " + targetDirectory + "\r\n";
+                // Process the list of files found in the directory.
+                string[] fileEntries = Directory.GetFiles(targetDirectory);
+                foreach (string fileName in fileEntries)
+                    ProcessFile(fileName, fecha_comparativa, TPV);
+            }
+            catch
+            {
+                textBox7.Text = "Error en process Directory" + targetDirectory;
+            }
 
             // Recurse into subdirectories of this directory.
-           // string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
-           // foreach (string subdirectory in subdirectoryEntries)
-             //   ProcessDirectory(subdirectory,fecha_comparativa,TPV);
+            // string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+            // foreach (string subdirectory in subdirectoryEntries)
+            //   ProcessDirectory(subdirectory,fecha_comparativa,TPV);
         }
 
         // Insert logic for processing found files here.
-        public void ProcessFile(string path,string fecha_comparativa,string TPV)
+        public void ProcessFile(string path, string fecha_comparativa, string TPV)
         {
-            string resultado = "";
-            //    if (File.GetCreationTime(path) < Convert.ToDateTime("2019-10-01 00:00:00"))
-            textBox7.Text = textBox7.Text + "Procesando Fichero: " + path+"\r\n";
 
-            if (File.GetCreationTime(path) < Convert.ToDateTime(fecha_comparativa))
+            try
             {
-                // MessageBox.Show(path+" "+ File.GetCreationTime(path).ToString());
-                FicherosGarumclass nuevaincidencia = new FicherosGarumclass();
-                nuevaincidencia.Fecha_Estudio = DateTime.Now;
-                nuevaincidencia.Fecha_Fichero = File.GetCreationTime(path);
-                nuevaincidencia.Nombre_Estacion = textBox14.Text;
-                nuevaincidencia.Nombre_Fichero = path;
-                nuevaincidencia.TPV = TPV;
-                string url = textBox6.Text.Trim() + "api/ficherosgarum";
-                resultado = Send<FicherosGarumclass>(url, nuevaincidencia, "POST");
-                textBox7.Text = textBox7.Text + "Resultado Fichero KO: "  + "\r\n";
-                //textBox7.Text = textBox7.Text + resultado + "\r\n";
-                // MessageBox.Show(resultado);
+                string resultado = "";
+                //    if (File.GetCreationTime(path) < Convert.ToDateTime("2019-10-01 00:00:00"))
+                textBox7.Text = textBox7.Text + DateTime.Now.ToString() + " Procesando Fichero: " + path + "\r\n";
+
+                if (File.GetCreationTime(path) < Convert.ToDateTime(fecha_comparativa))
+                {
+                    // MessageBox.Show(path+" "+ File.GetCreationTime(path).ToString());
+                    FicherosGarumclass nuevaincidencia = new FicherosGarumclass();
+                    nuevaincidencia.Fecha_Estudio = DateTime.Now;
+                    nuevaincidencia.Fecha_Fichero = File.GetCreationTime(path);
+                    nuevaincidencia.Nombre_Estacion = textBox14.Text;
+                    nuevaincidencia.Nombre_Fichero = path;
+                    nuevaincidencia.TPV = TPV;
+                    string url = textBox6.Text.Trim() + "api/ficherosgarum";
+                    resultado = Send<FicherosGarumclass>(url, nuevaincidencia, "POST");
+                    textBox7.Text = textBox7.Text + DateTime.Now.ToString() + " Resultado Fichero KO: " + "\r\n";
+                    //textBox7.Text = textBox7.Text + resultado + "\r\n";
+                    // MessageBox.Show(resultado);
 
 
-                // aqui grabamos el post en base de datos
+                    // aqui grabamos el post en base de datos
+                }
+                else
+                {
+                    textBox7.Text = textBox7.Text + DateTime.Now.ToString() + " Fichero OK: " + "\r\n";
+                }
+
             }
-            else
+            catch
             {
-                textBox7.Text = textBox7.Text + "Fichero OK: " + "\r\n";
+                textBox7.Text = "Error en process Filename" + path;
             }
-                //Convert.ToDateTime(Convert.ToString(DateTime.Now).Substring(0, 10).Trim() + " 00:00:00");
+
+            //Convert.ToDateTime(Convert.ToString(DateTime.Now).Substring(0, 10).Trim() + " 00:00:00");
             //MessageBox.Show();
 
             //MessageBox.Show(File.GetCreationTime(path).ToString());
 
-            
+
 
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            textBox5.Text = Convert.ToString(DateTime.Now).Substring(0, 10).Trim() + " 00:00:00";
-            textBox3.Text = DateTime.Now.ToString("hh:mm:ss");
-            if (textBox3.Text == textBox4.Text)
+            try
             {
-                if (checkBox1.Checked)
+
+                textBox5.Text = Convert.ToString(DateTime.Now).Substring(0, 10).Trim() + " 00:00:00";
+                textBox3.Text = DateTime.Now.ToString("hh:mm:ss");
+                if (textBox3.Text == textBox4.Text)
                 {
-                    ProcessDirectory(textBox1.Text, textBox5.Text, "TPV1");
-                    ProcessDirectory(textBox2.Text, textBox5.Text, "TPV1");
+                    textBox7.Text = "";
+                    if (checkBox1.Checked)
+                    {
+                        ProcessDirectory(textBox1.Text, textBox5.Text, "TPV1");
+                        ProcessDirectory(textBox2.Text, textBox5.Text, "TPV1");
+                    }
+                    if (checkBox2.Checked)
+                    {
+                        ProcessDirectory(textBox8.Text, textBox5.Text, "TPV2");
+                        ProcessDirectory(textBox9.Text, textBox5.Text, "TPV2");
+                    }
+                    if (checkBox3.Checked)
+                    {
+                        ProcessDirectory(textBox10.Text, textBox5.Text, "TPV3");
+                        ProcessDirectory(textBox11.Text, textBox5.Text, "TPV3");
+                    }
+                    if (checkBox4.Checked)
+                    {
+                        ProcessDirectory(textBox12.Text, textBox5.Text, "TPV4");
+                        ProcessDirectory(textBox13.Text, textBox5.Text, "TPV4");
+                    }
                 }
-                if (checkBox2.Checked)
-                {
-                    ProcessDirectory(textBox8.Text, textBox5.Text, "TPV2");
-                    ProcessDirectory(textBox9.Text, textBox5.Text, "TPV2");
-                }
-                if (checkBox3.Checked)
-                {
-                    ProcessDirectory(textBox10.Text, textBox5.Text, "TPV3");
-                    ProcessDirectory(textBox11.Text, textBox5.Text, "TPV3");
-                }
-                if (checkBox4.Checked)
-                {
-                    ProcessDirectory(textBox12.Text, textBox5.Text, "TPV4");
-                    ProcessDirectory(textBox13.Text, textBox5.Text, "TPV4");
-                }
+            }
+            catch
+            {
+                textBox7.Text = "Error en el timer al procesar";
             }
         }
 
-       
+
         private void button3_Click(object sender, EventArgs e)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -132,10 +147,11 @@ namespace RevisionFicherosGarumForm
                 config.AppSettings.Settings.Add("xadinput1", textBox1.Text);
                 config.Save(ConfigurationSaveMode.Modified);
             }
-            catch {
+            catch
+            {
                 config.AppSettings.Settings.Add("xadinput1", textBox1.Text);
                 config.Save(ConfigurationSaveMode.Modified);
-                   }
+            }
 
             try
             {
@@ -389,7 +405,7 @@ namespace RevisionFicherosGarumForm
             }
 
             revisadirectorios();
-            
+
             // comprobar directorios
 
         }
@@ -402,7 +418,7 @@ namespace RevisionFicherosGarumForm
 
             string paramxadinput1 = ConfigurationManager.AppSettings["xadinput1"];
             string param4glexport1 = ConfigurationManager.AppSettings["4glexport1"];
-            string paramactivo1= ConfigurationManager.AppSettings["paramactivo1"];
+            string paramactivo1 = ConfigurationManager.AppSettings["paramactivo1"];
 
             string paramxadinput2 = ConfigurationManager.AppSettings["xadinput2"];
             string param4glexport2 = ConfigurationManager.AppSettings["4glexport2"];
@@ -432,10 +448,10 @@ namespace RevisionFicherosGarumForm
 
             // rellenamos los check
 
-            if (paramactivo1 == "S") { checkBox1.Checked = true;  } else { checkBox1.Checked = false;  }
-            if (paramactivo2 == "S") { checkBox2.Checked = true;  } else { checkBox2.Checked = false;  }
-            if (paramactivo3 == "S") { checkBox3.Checked = true;  } else { checkBox3.Checked = false;  }
-            if (paramactivo4 == "S") { checkBox4.Checked = true;  } else { checkBox4.Checked = false;  }
+            if (paramactivo1 == "S") { checkBox1.Checked = true; } else { checkBox1.Checked = false; }
+            if (paramactivo2 == "S") { checkBox2.Checked = true; } else { checkBox2.Checked = false; }
+            if (paramactivo3 == "S") { checkBox3.Checked = true; } else { checkBox3.Checked = false; }
+            if (paramactivo4 == "S") { checkBox4.Checked = true; } else { checkBox4.Checked = false; }
 
             // rellenamos por defecto los textos de input y export si estan vacios
             if (string.IsNullOrEmpty(textBox1.Text.Trim()))
@@ -488,13 +504,14 @@ namespace RevisionFicherosGarumForm
             }
             revisadirectorios();
 
-            
-            
+
+
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            textBox7.Text = "";
             if (checkBox1.Checked)
             {
                 ProcessDirectory(textBox1.Text, textBox5.Text, "TPV1");
@@ -522,7 +539,7 @@ namespace RevisionFicherosGarumForm
             string result = "";
             try
             {
-                 
+
 
                 JavaScriptSerializer js = new JavaScriptSerializer();
 
@@ -548,12 +565,12 @@ namespace RevisionFicherosGarumForm
                 {
                     result = streamReader.ReadToEnd();
                 }
-                
+
             }
             catch (Exception e)
             {
 
-               
+
                 //en caso de error lo manejamos en el mensaje
                 result = e.Message;
 
@@ -564,82 +581,132 @@ namespace RevisionFicherosGarumForm
 
         public void revisadirectorios()
         {
-            if (checkBox1.Checked)
-            {
-                if (Directory.Exists(textBox1.Text)) { label5.Text = "OK"; label5.BackColor = Color.Green; label5.Visible = true; }
-                else { label5.Text = "KO"; label5.BackColor = Color.Red; label5.Visible = true; }
-
-                if (Directory.Exists(textBox2.Text)) { label6.Text = "OK"; label6.BackColor = Color.Green; label6.Visible = true; }
-                else { label6.Text = "KO"; label6.BackColor = Color.Red; label6.Visible = true; }
-            }
-            else { label5.Visible = false; label6.Visible = false; }
-
-            if (checkBox2.Checked)
-            {
-                if (Directory.Exists(textBox8.Text)) { label10.Text = "OK"; label10.BackColor = Color.Green; label10.Visible = true; }
-                else { label10.Text = "KO"; label10.BackColor = Color.Red; label10.Visible = true; }
-
-                if (Directory.Exists(textBox9.Text)) { label11.Text = "OK"; label11.BackColor = Color.Green; label11.Visible = true; }
-                else { label11.Text = "KO"; label11.BackColor = Color.Red; label11.Visible = true; }
-            }
-            else { label10.Visible = false; label11.Visible = false; }
-
-            if (checkBox3.Checked)
-            {
-                if (Directory.Exists(textBox10.Text)) { label14.Text = "OK"; label14.BackColor = Color.Green; label14.Visible = true; }
-                else { label14.Text = "KO"; label14.BackColor = Color.Red; label14.Visible = true; }
-
-                if (Directory.Exists(textBox11.Text)) { label15.Text = "OK"; label15.BackColor = Color.Green; label15.Visible = true; }
-                else { label15.Text = "KO"; label15.BackColor = Color.Red; label15.Visible = true; }
-            }
-            else { label14.Visible = false; label15.Visible = false; }
-
-            if (checkBox4.Checked)
-            {
-                if (Directory.Exists(textBox12.Text)) { label18.Text = "OK"; label18.BackColor = Color.Green; label18.Visible = true; }
-                else { label18.Text = "KO"; label18.BackColor = Color.Red; label18.Visible = true; }
-
-                if (Directory.Exists(textBox13.Text)) { label19.Text = "OK"; label19.BackColor = Color.Green; label19.Visible = true; }
-                else { label19.Text = "KO"; label19.BackColor = Color.Red; label19.Visible = true; }
-            }
-            else { label18.Visible = false; label19.Visible = false; }
             try
             {
-                var myRequest = (HttpWebRequest)WebRequest.Create(textBox6.Text);
-
-                var response = (HttpWebResponse)myRequest.GetResponse();
-
-                if (response.StatusCode == HttpStatusCode.OK)
+                if (checkBox1.Checked)
                 {
-                    label9.Text = "OK";
-                    label9.BackColor = Color.Green;
-                    label9.Visible = true;
+                    if (Directory.Exists(textBox1.Text)) { label5.Text = "OK"; label5.BackColor = Color.Green; label5.Visible = true; }
+                    else { label5.Text = "KO"; label5.BackColor = Color.Red; label5.Visible = true; }
+
+                    if (Directory.Exists(textBox2.Text)) { label6.Text = "OK"; label6.BackColor = Color.Green; label6.Visible = true; }
+                    else { label6.Text = "KO"; label6.BackColor = Color.Red; label6.Visible = true; }
                 }
-                else
+                else { label5.Visible = false; label6.Visible = false; }
+
+                if (checkBox2.Checked)
+                {
+                    if (Directory.Exists(textBox8.Text)) { label10.Text = "OK"; label10.BackColor = Color.Green; label10.Visible = true; }
+                    else { label10.Text = "KO"; label10.BackColor = Color.Red; label10.Visible = true; }
+
+                    if (Directory.Exists(textBox9.Text)) { label11.Text = "OK"; label11.BackColor = Color.Green; label11.Visible = true; }
+                    else { label11.Text = "KO"; label11.BackColor = Color.Red; label11.Visible = true; }
+                }
+                else { label10.Visible = false; label11.Visible = false; }
+
+                if (checkBox3.Checked)
+                {
+                    if (Directory.Exists(textBox10.Text)) { label14.Text = "OK"; label14.BackColor = Color.Green; label14.Visible = true; }
+                    else { label14.Text = "KO"; label14.BackColor = Color.Red; label14.Visible = true; }
+
+                    if (Directory.Exists(textBox11.Text)) { label15.Text = "OK"; label15.BackColor = Color.Green; label15.Visible = true; }
+                    else { label15.Text = "KO"; label15.BackColor = Color.Red; label15.Visible = true; }
+                }
+                else { label14.Visible = false; label15.Visible = false; }
+
+                if (checkBox4.Checked)
+                {
+                    if (Directory.Exists(textBox12.Text)) { label18.Text = "OK"; label18.BackColor = Color.Green; label18.Visible = true; }
+                    else { label18.Text = "KO"; label18.BackColor = Color.Red; label18.Visible = true; }
+
+                    if (Directory.Exists(textBox13.Text)) { label19.Text = "OK"; label19.BackColor = Color.Green; label19.Visible = true; }
+                    else { label19.Text = "KO"; label19.BackColor = Color.Red; label19.Visible = true; }
+                }
+                else { label18.Visible = false; label19.Visible = false; }
+                try
+                {
+                    var myRequest = (HttpWebRequest)WebRequest.Create(textBox6.Text);
+
+                    var response = (HttpWebResponse)myRequest.GetResponse();
+
+                    if (response.StatusCode == HttpStatusCode.OK)
+                    {
+                        label9.Text = "OK";
+                        label9.BackColor = Color.Green;
+                        label9.Visible = true;
+                    }
+                    else
+                    {
+                        label9.Text = "KO";
+                        label9.BackColor = Color.Red;
+                        label9.Visible = true;
+                    }
+                }
+                catch (Exception ex)
                 {
                     label9.Text = "KO";
                     label9.BackColor = Color.Red;
                     label9.Visible = true;
                 }
+
             }
-            catch (Exception ex)
+            catch
             {
-                label9.Text = "KO";
-                label9.BackColor = Color.Red;
-                label9.Visible = true;
+                textBox7.Text = "Error a revisar directorios creados";
             }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Desea Cerrar la aplicacion?", "Aviso", MessageBoxButtons.YesNo))
-            {
-                this.Close();
+
+            this.Close();
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+            this.Size = new Size(1204, 409);
+            button4.Visible = false;
+            button5.Visible = true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.Size = new Size(572, 409);
+            button5.Visible = false;
+            button4.Visible = true;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            DialogResult dialogo = MessageBox.Show("¿ Desea Salir de la Aplicacion ?",
+                       "Salir de Aplicacion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogo == DialogResult.Yes) { }
+            else { e.Cancel = true; }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            //Hacemos visible el formulario
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            //Ocultamos el icono de la bandeja de sistema
+            notifyIcon1.Visible = false;
+        }
+
+       
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            //Si el estado actual de la ventana es "minimizado"...
+               if (this.WindowState == FormWindowState.Minimized)
+               {
+            //Ocultamos el formulario
+            this.Visible = false;
+            //Hacemos visible el icono de la bandeja del sistema
+            notifyIcon1.Visible = true;
             }
         }
     }
-
 }
 

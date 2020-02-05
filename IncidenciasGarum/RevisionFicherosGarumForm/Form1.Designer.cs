@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -73,6 +74,9 @@
             this.label22 = new System.Windows.Forms.Label();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
             // textBox1
@@ -147,7 +151,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(20, 415);
+            this.button3.Location = new System.Drawing.Point(20, 332);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(138, 23);
             this.button3.TabIndex = 10;
@@ -177,7 +181,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(173, 415);
+            this.button1.Location = new System.Drawing.Point(164, 332);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(163, 23);
             this.button1.TabIndex = 13;
@@ -229,10 +233,10 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(20, 325);
+            this.textBox7.Location = new System.Drawing.Point(560, 20);
             this.textBox7.Multiline = true;
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(518, 88);
+            this.textBox7.Size = new System.Drawing.Size(616, 295);
             this.textBox7.TabIndex = 20;
             // 
             // label10
@@ -449,7 +453,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(361, 415);
+            this.button2.Location = new System.Drawing.Point(469, 332);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 45;
@@ -457,11 +461,40 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(342, 332);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(104, 23);
+            this.button4.TabIndex = 46;
+            this.button4.Text = "Ver Diario";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(342, 332);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(104, 23);
+            this.button5.TabIndex = 47;
+            this.button5.Text = "Ocultar Diario";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "4GL-DptoXAD-Revision Ficheros Garum ";
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 450);
+            this.ClientSize = new System.Drawing.Size(554, 370);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox14);
             this.Controls.Add(this.label22);
@@ -507,7 +540,9 @@
             this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "Revision de Ficheros de Garum";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -558,6 +593,9 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 }
 
