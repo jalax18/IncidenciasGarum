@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System.Configuration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,20 +8,28 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
 using System.Windows.Forms;
 using System.IO;
 using System.Web.Script.Serialization;
 using System.Net;
 using RevisionFicherosGarumForm.Models.Request;
+using RevisionFicherosGarumForm.Models;
+using System.Net.Mail;
+using System.Net.Configuration;
 
 namespace RevisionFicherosGarumForm
 {
     public partial class Form1 : Form
     {
+        private string correoApp { get; set; }
+
         public Form1()
         {
             InitializeComponent();
+
+            SmtpSection smtp = (SmtpSection)ConfigurationManager.GetSection("system.net/mailSettings/smtp");
+            correoApp = smtp.From;
+            textBox15.Text = correoApp;
         }
 
 
@@ -707,6 +717,32 @@ namespace RevisionFicherosGarumForm
             notifyIcon1.Visible = true;
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var smtp = new SmtpClient();
+            EmailSender emailSender = new EmailSender(smtp, correoApp);
+            emailSender.SendEmailAsync("jalax@4glsp.com", "jalax18@gmail.com", "Este es un mensaje de prueba ");
+            MessageBox.Show("Correo Enviado correctamente");
+         //   LimpiarFormulario();
+        }
+
+        /*
+            var smtp = new SmtpClient();
+            EmailSender emailSender = new EmailSender(smtp,correoApp);
+            emailSender.SendEmailAsync(correoOrigen.Text, correoDestino.Text, mensaje.Text);
+            MessageBox.Show("Correo Enviado correctamente");
+            LimpiarFormulario();
+        }
+
+        private void LimpiarFormulario()
+        {
+            correoOrigen.Text = string.Empty;
+            correoDestino.Text = string.Empty;
+            mensaje.Text = string.Empty;
+        }
+         */
+
     }
 }
 
