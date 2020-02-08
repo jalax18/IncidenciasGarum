@@ -26,6 +26,8 @@ namespace IncidenciasGarum.Controllers
                          {
 
 
+
+                             IDFichero=d.IDFichero,
                              Fecha_Estudio = d.Fecha_Estudio,
                              Fecha_Fichero = d.Fecha_Fichero,
                              Nombre_Estacion = d.Nombre_Estacion,

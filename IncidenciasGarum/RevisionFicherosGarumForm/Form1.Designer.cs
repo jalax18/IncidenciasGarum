@@ -498,7 +498,6 @@
             this.button6.TabIndex = 48;
             this.button6.Text = "Correo";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // textBox15
             // 
@@ -506,6 +505,7 @@
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(339, 20);
             this.textBox15.TabIndex = 49;
+            this.textBox15.Visible = false;
             // 
             // Form1
             // 

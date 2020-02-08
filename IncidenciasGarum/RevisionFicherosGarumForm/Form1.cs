@@ -718,14 +718,14 @@ namespace RevisionFicherosGarumForm
             }
         }
 
-        private void button6_Click(object sender, EventArgs e)
+       /* private void button6_Click(object sender, EventArgs e)
         {
-            var smtp = new SmtpClient();
-            EmailSender emailSender = new EmailSender(smtp, correoApp);
-            emailSender.SendEmailAsync("jalax@4glsp.com", "jalax18@gmail.com", "Este es un mensaje de prueba ");
-            MessageBox.Show("Correo Enviado correctamente");
+           // var smtp = new SmtpClient();
+           // EmailSender emailSender = new EmailSender(smtp, correoApp);
+           // emailSender.SendEmailAsync("jalax18@4glsp.com", "jalax18@gmail.com", "Este es un mensaje de prueba ");
+         //   MessageBox.Show("Correo Enviado correctamente");
          //   LimpiarFormulario();
-        }
+        }*/
 
         /*
             var smtp = new SmtpClient();
