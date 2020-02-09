@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using ServiciosWeb.Datos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
@@ -81,20 +83,26 @@ namespace ControlIncidenciasGarumForm
         
         private void button1_Click(object sender, EventArgs e)
         {
+            HttpClient clientehttp = new HttpClient();
+            clientehttp.BaseAddress=new Uri(textBox3.Text);
+            var request = clientehttp.GetAsync("api/ficherosgarum").Result;
+            if (request.IsSuccessStatusCode)
 
-             
-             string url = @"http://2.139.147.209:1602/api/ficherosgarum";
-             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            {
+                var Resultstring = request.Content.ReadAsStringAsync().Result;
+                var listado = JsonConvert.DeserializeObject<List<ficherosgarum>>(Resultstring);
+
+                dataGridView1.DataSource = listado;
+                //dataGridView1.ColumnCount =6;
+                //dataGridView1.columns(0).Width = 100;
+                //dataGridView1.columns(1).Width = 150;
+                foreach (var item in listado)
+                {
+                 //   Console.WriteLine(item.Nombre_Fichero);
+                }
 
 
-             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-             using (Stream stream = response.GetResponseStream())
-             using (StreamReader reader = new StreamReader(stream))
-             {
-                 var json = reader.ReadToEnd();
-                 incidencias = JsonConvert.DeserializeObject<Incidencias>(json);
-             }
-           
+            }
 
 
         }

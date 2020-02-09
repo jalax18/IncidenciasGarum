@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="94803a95-d06d-4138-be00-7c0bfa796b3e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:37964/ServicioFicherosGarum.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServicioFicherosGarum.xsd" MetadataType="Schema" ID="9344bbc0-8f27-40bb-a67e-13d1b9b004a7" SourceId="1" SourceUrl="http://localhost:37964/ServicioFicherosGarum.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServicioFicherosGarum1.xsd" MetadataType="Schema" ID="fae4f112-0acd-4393-8567-eaa522cd0871" SourceId="1" SourceUrl="http://localhost:37964/ServicioFicherosGarum.svc?xsd=xsd2" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="9d3b0b74-fc86-43ad-8bcd-4cc3af070699" SourceId="1" SourceUrl="http://localhost:37964/ServicioFicherosGarum.svc?wsdl" />
+    <MetadataFile FileName="ServicioFicherosGarum2.xsd" MetadataType="Schema" ID="86f542bc-5f17-4bd0-91a5-5d09ac15ed4e" SourceId="1" SourceUrl="http://localhost:37964/ServicioFicherosGarum.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServicioFicherosGarum.disco" MetadataType="Disco" ID="dfcd5e33-a3ab-4402-84de-37f016214b90" SourceId="1" SourceUrl="http://localhost:37964/ServicioFicherosGarum.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

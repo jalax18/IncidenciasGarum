@@ -1,0 +1,39 @@
+﻿@model List<ficherosgarum>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de Incidencias</h2>
+<hr/>
+
+<table>
+    <thead>
+        <tr>
+            <td>IDFichero</td>
+            <td>Fecha_Estudio</td>
+            <td>Fecha_Fichero</td>
+            <td>Nombre_Estacion</td>
+            <td>Nombre_Fichero</td>
+            <td>TPV</td>
+
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var ficherosgarum in Model)
+        {   
+            <tr>
+                <td>@ficherosgarum.IDFichero</td>
+                <td>@ficherosgarum.Fecha_Estudio</td>
+                <td>@ficherosgarum.Fecha_Fichero</td>
+                <td>@ficherosgarum.Nombre_Estacion</td>
+                <td>@ficherosgarum.Nombre_Fichero</td>
+                <td>@ficherosgarum.TPV</td>
+
+
+            </tr>
+        }
+    </tbody>
+    </table>
+
