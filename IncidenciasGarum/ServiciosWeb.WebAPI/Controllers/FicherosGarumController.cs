@@ -65,18 +65,39 @@ namespace ServiciosWeb.WebAPI.Controllers
             
         }
 
-        [HttpDelete]
-        public bool Delete(ficherosgarum Ficherogarum)
-            
+         [HttpDelete] //borrar un registro que le llamemos,pero para nosotros necesitamos que se borren todos por lo qeu lo modificamos
+         public bool Delete()
+
         {
 
             // buscamos el registro y lo guardamos en ficherogarumparaborrar y lo marcamos para borrar
-            var ficherogarumparaborrar = BD.ficherosgarum.FirstOrDefault(x => x.IDFichero == Ficherogarum.IDFichero);
+            //var ficherogarumparaborrar = BD.ficherosgarum.FirstOrDefault(x => x.IDFichero == id);
+            IEnumerable<ficherosgarum> ficherogarumparaborrar = BD.ficherosgarum.Where(x => x.IDFichero > 1);
             // vamos a decirle que borre el registro del ficherogarumparaborrar
-            BD.ficherosgarum.Remove(ficherogarumparaborrar) ;
-            return BD.SaveChanges()>0;
+            BD.ficherosgarum.RemoveRange(ficherogarumparaborrar);
+            //BD.ficherosgarum.Remove(ficherogarumparaborrar);
+            return BD.SaveChanges() > 0;
         }
 
+       /* [HttpDelete]
+        public int Delete(int id)
+            
+        {
+            //int c=0;
+            // buscamos el registro y lo guardamos en ficherogarumparaborrar y lo marcamos para borrar
+            //IEnumerable<ficherosgarum> ficherosgarumparaborrar = BD.ficherosgarum.Where(x => x.IDFichero > id);
+            var ficherogarumparaborrar = BD.ficherosgarum.FirstOrDefault(x => x.IDFichero == id);
+            BD.ficherosgarum.Remove(ficherogarumparaborrar);
+            return BD.SaveChanges()>0;
+            // vamos a decirle que borre el registro del ficherogarumparaborrar
+            //  foreach (var item in ficherosgarumparaborrar)
+            //  {
+           // BD.ficherosgarum.Remove(item);
+            //BD.ficherosgarum.Remove(item);
+           // c = + BD.SaveChanges();
+           // }
+           // return c;
+        }*/
 
     }
 }

@@ -22,6 +22,8 @@ namespace ControlIncidenciasGarumForm
     
     public partial class Form1 : Form
     {
+
+        public List<ficherosgarum> listado;
         public Incidencias incidencias= new Incidencias();
 
         public Form1()
@@ -90,16 +92,19 @@ namespace ControlIncidenciasGarumForm
 
             {
                 var Resultstring = request.Content.ReadAsStringAsync().Result;
-                var listado = JsonConvert.DeserializeObject<List<ficherosgarum>>(Resultstring);
-
+                listado = JsonConvert.DeserializeObject<List<ficherosgarum>>(Resultstring);
+                int x = 0;
                 dataGridView1.DataSource = listado;
+                foreach (var item in listado)
+                {
+                    x++;
+                }
+                textBox5.Text = Convert.ToString(x);
+
                 //dataGridView1.ColumnCount =6;
                 //dataGridView1.columns(0).Width = 100;
                 //dataGridView1.columns(1).Width = 150;
-                foreach (var item in listado)
-                {
-                 //   Console.WriteLine(item.Nombre_Fichero);
-                }
+
 
 
             }
@@ -119,5 +124,63 @@ namespace ControlIncidenciasGarumForm
         {
             this.Close();
         }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            if (listado == null)
+            {
+
+                MessageBox.Show("No hay registros en la base datos");
+            }
+            else
+            {
+                label6.Text = "Borrado en proceso....espere";
+                label6.Visible = true;
+                HttpClient clientehttp = new HttpClient();
+                clientehttp.BaseAddress = new Uri(textBox3.Text);
+                var request = clientehttp.DeleteAsync("api/ficherosgarum/").Result;
+                if (request.IsSuccessStatusCode)
+
+                {
+                      var Resultstring = request.Content.ReadAsStringAsync().Result;
+
+                    //  MessageBox.Show( "RESULTADO DEL BORRADO ==> " + Resultstring + "\r\n");
+
+                }
+                /* foreach (var item in listado)
+                 {
+                     var request = clientehttp.DeleteAsync("api/ficherosgarum/" + item.IDFichero).Result;
+                     if (request.IsSuccessStatusCode)
+
+                     {
+                       //  var Resultstring = request.Content.ReadAsStringAsync().Result;
+
+                       //  textBox4.Text = "RESULTADO DEL BORRADO ==> " + Resultstring + "\r\n";
+
+                     }
+                 }*/
+                label6.Visible = false;
+                MessageBox.Show("Proceso concluido");
+                //var request = clientehttp.DeleteAsync("api/ficherosgarum/" + 47966).Result;
+                button1.PerformClick();
+                /* foreach (var registro in listado)
+                 {
+                     var request = clientehttp.DeleteAsync("api/ficherosgarum/" + registro.IDFichero).Result;
+                     if (request.IsSuccessStatusCode)
+
+                     {
+                         var Resultstring = request.Content.ReadAsStringAsync().Result;
+
+                         textBox4.Text = "Borrado Fichero ==> " + registro.Nombre_Fichero + " RESULTADO DEL BORRADO ==> " + Resultstring + "\r\n";
+
+                     }
+
+                 }*/
+
+                //MessageBox.Show("Pulse en Recoger Datos para ver que los registros se han borrado");
+            }
+            }
+
+       
     }
 }
