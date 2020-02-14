@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\jalax.4GLSP\source\repos\IncidenciasGarum\IncidenciasGarum\ServiciosWeb.Datos\LibreriaBD.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\jalax.4GLSP\source\repos\IncidenciasGarum\IncidenciasGarum\ServiciosWeb.Datos\IncidenciasGarum.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

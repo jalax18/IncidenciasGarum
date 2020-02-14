@@ -8,96 +8,85 @@ using System.Web.Http;
 
 namespace ServiciosWeb.WebAPI.Controllers
 {
-    public class FicherosGarumController : ApiController
+    public class EstudioAjustesController : ApiController
     {
         // conectamos a la base de datos y la referenciamos en un elemento llamado BD
 
         IncidenciasGarumconnection BD = new IncidenciasGarumconnection();
-
+        
         // este ficherosgarum lo coge del proyecto serviciosweb.Datos la tabla ficherosgarum
         [HttpGet]
-        public IEnumerable<ficherosgarum> Get()
+        public IEnumerable<EstudioAjustes> Get()
         {
             // creamo un objeto listado  que va a ser la directamente la tabla ficherosgarum transformada en una lista
-            var listado = BD.ficherosgarum.ToList();
+            var listado = BD.EstudioAjustes.ToList();
             return listado;
         }
 
         [HttpGet]
 
         // en este metodo ya no nos devuelve un listado de ficheros si no un unico fichero
-        public ficherosgarum Get(int id)
+        public EstudioAjustes Get(int id)
         {
             // creamo un objeto listado  que va a devolver el resultado de la consulta por linqqiu
-            var ficherogarum = BD.ficherosgarum.FirstOrDefault(x =>x.IDFichero == id);
-            return ficherogarum;
+            var estudioajustes = BD.EstudioAjustes.FirstOrDefault(x => x.id_ajuste == id);
+            return estudioajustes;
         }
 
         [HttpPost]
 
         // en el caso de un alta lo que queremos en la respuesta es un booleano para saber si se ha grabado o no y en los parametros
         // vamos a mandar un objeto ficherosgarum
-        public bool Post(ficherosgarum Ficherogarum)
+        public bool Post(EstudioAjustes estudioajustes)
         {
             // lo que hacemos es en la tabla ficherosgarum añadir un registro del objeto ficheroalta que es del tipo ficherosgarum
-            BD.ficherosgarum.Add(Ficherogarum);
+            BD.EstudioAjustes.Add(estudioajustes);
             // BD.SaveChanges(); con esto ya se graba en base de datos pero vamos a modificar la linea para qeu retorne el valor que da y si es mas de cero es qeu se produjo y nos
             // nos vale como real
-            return BD.SaveChanges() >0 ;
+            return BD.SaveChanges() > 0;
         }
 
         [HttpPut]
         // en el caso del put y estando trabajando con emptyty debemos primero buscar el registro para luego grabarlo
-        public bool Put(ficherosgarum Ficherogarum)
+        public bool Put(EstudioAjustes estudioAjustes)
         {
             // creamos un objeto fichero ficherogarumactualizar que va a tener la informacion del registro que vams a buscar en base de datos y que vamos a actualizar
 
-            var ficherogarumactualizar = BD.ficherosgarum.FirstOrDefault(x => x.IDFichero == Ficherogarum.IDFichero);
+            var estudioajustesactualizar = BD.EstudioAjustes.FirstOrDefault(x => x.id_ajuste == estudioAjustes.id_ajuste);
 
             // vamos modificando el registro con los datos que nos vienen para actualizar y grabamos los cambios en base de datos
 
-            ficherogarumactualizar.Fecha_Estudio = Ficherogarum.Fecha_Estudio;
-            ficherogarumactualizar.Fecha_Fichero = Ficherogarum.Fecha_Fichero;
-            ficherogarumactualizar.Nombre_Estacion = Ficherogarum.Nombre_Estacion;
-            ficherogarumactualizar.Nombre_Fichero = Ficherogarum.Nombre_Fichero;
-            ficherogarumactualizar.TPV = Ficherogarum.TPV;
-            return BD.SaveChanges()>0;
-            
+            estudioajustesactualizar.surtidor = estudioAjustes.surtidor;
+            estudioajustesactualizar.Manguera = estudioAjustes.Manguera;
+            estudioajustesactualizar.LitrosLec = estudioAjustes.LitrosLec;
+            estudioajustesactualizar.Litrosvta = estudioAjustes.Litrosvta;
+            estudioajustesactualizar.Fecha_estudio = estudioAjustes.Fecha_estudio;
+            estudioajustesactualizar.Fecha_Ajustes = estudioAjustes.Fecha_Ajustes;
+            estudioajustesactualizar.Nombre_Estacion = estudioAjustes.Nombre_Estacion;
+            estudioajustesactualizar.Diferencia = estudioAjustes.Diferencia;
+
+            return BD.SaveChanges() > 0;
+
         }
 
-         [HttpDelete] //borrar un registro que le llamemos,pero para nosotros necesitamos que se borren todos por lo qeu lo modificamos
-         public bool Delete()
+        [HttpDelete] //borrar un registro que le llamemos,pero para nosotros necesitamos que se borren todos por lo qeu lo modificamos
+        public bool Delete()
 
         {
 
             // buscamos el registro y lo guardamos en ficherogarumparaborrar y lo marcamos para borrar
             //var ficherogarumparaborrar = BD.ficherosgarum.FirstOrDefault(x => x.IDFichero == id);
-            IEnumerable<ficherosgarum> ficherogarumparaborrar = BD.ficherosgarum.Where(x => x.IDFichero > 1);
+            IEnumerable<EstudioAjustes> estudioajustesparaborrar = BD.EstudioAjustes.Where(x => x.id_ajuste > 1);
             // vamos a decirle que borre el registro del ficherogarumparaborrar
-            BD.ficherosgarum.RemoveRange(ficherogarumparaborrar);
+            BD.EstudioAjustes.RemoveRange(estudioajustesparaborrar);
             //BD.ficherosgarum.Remove(ficherogarumparaborrar);
             return BD.SaveChanges() > 0;
         }
 
-       /* [HttpDelete]
-        public int Delete(int id)
-            
-        {
-            //int c=0;
-            // buscamos el registro y lo guardamos en ficherogarumparaborrar y lo marcamos para borrar
-            //IEnumerable<ficherosgarum> ficherosgarumparaborrar = BD.ficherosgarum.Where(x => x.IDFichero > id);
-            var ficherogarumparaborrar = BD.ficherosgarum.FirstOrDefault(x => x.IDFichero == id);
-            BD.ficherosgarum.Remove(ficherogarumparaborrar);
-            return BD.SaveChanges()>0;
-            // vamos a decirle que borre el registro del ficherogarumparaborrar
-            //  foreach (var item in ficherosgarumparaborrar)
-            //  {
-           // BD.ficherosgarum.Remove(item);
-            //BD.ficherosgarum.Remove(item);
-           // c = + BD.SaveChanges();
-           // }
-           // return c;
-        }*/
+       
+
+
+
 
     }
 }
