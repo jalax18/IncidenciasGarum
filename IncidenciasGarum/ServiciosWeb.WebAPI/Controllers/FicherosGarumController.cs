@@ -1,4 +1,4 @@
-﻿using ServiciosWeb.Datos;
+﻿using ServicioWeb.Datos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +10,20 @@ namespace ServiciosWeb.WebAPI.Controllers
 {
     public class FicherosGarumController : ApiController
     {
+
+
         // conectamos a la base de datos y la referenciamos en un elemento llamado BD
 
-        IncidenciasGarumconnection BD = new IncidenciasGarumconnection();
 
+        IncidenciasGarumConnectionEntities BD = new IncidenciasGarumConnectionEntities();
         // este ficherosgarum lo coge del proyecto serviciosweb.Datos la tabla ficherosgarum
         [HttpGet]
         public IEnumerable<ficherosgarum> Get()
         {
             // creamo un objeto listado  que va a ser la directamente la tabla ficherosgarum transformada en una lista
-            var listado = BD.ficherosgarum.ToList();
+            var listado = BD.ficherosgarum;
+
+
             return listado;
         }
 
@@ -29,7 +33,7 @@ namespace ServiciosWeb.WebAPI.Controllers
         public ficherosgarum Get(int id)
         {
             // creamo un objeto listado  que va a devolver el resultado de la consulta por linqqiu
-            var ficherogarum = BD.ficherosgarum.FirstOrDefault(x =>x.IDFichero == id);
+            var ficherogarum = BD.ficherosgarum.FirstOrDefault(x => x.IDFichero == id);
             return ficherogarum;
         }
 
@@ -43,7 +47,7 @@ namespace ServiciosWeb.WebAPI.Controllers
             BD.ficherosgarum.Add(Ficherogarum);
             // BD.SaveChanges(); con esto ya se graba en base de datos pero vamos a modificar la linea para qeu retorne el valor que da y si es mas de cero es qeu se produjo y nos
             // nos vale como real
-            return BD.SaveChanges() >0 ;
+            return BD.SaveChanges() > 0;
         }
 
         [HttpPut]
@@ -61,12 +65,12 @@ namespace ServiciosWeb.WebAPI.Controllers
             ficherogarumactualizar.Nombre_Estacion = Ficherogarum.Nombre_Estacion;
             ficherogarumactualizar.Nombre_Fichero = Ficherogarum.Nombre_Fichero;
             ficherogarumactualizar.TPV = Ficherogarum.TPV;
-            return BD.SaveChanges()>0;
-            
+            return BD.SaveChanges() > 0;
+
         }
 
-         [HttpDelete] //borrar un registro que le llamemos,pero para nosotros necesitamos que se borren todos por lo qeu lo modificamos
-         public bool Delete()
+        [HttpDelete] //borrar un registro que le llamemos,pero para nosotros necesitamos que se borren todos por lo qeu lo modificamos
+        public bool Delete()
 
         {
 
@@ -78,26 +82,25 @@ namespace ServiciosWeb.WebAPI.Controllers
             //BD.ficherosgarum.Remove(ficherogarumparaborrar);
             return BD.SaveChanges() > 0;
         }
-
-       /* [HttpDelete]
-        public int Delete(int id)
-            
-        {
-            //int c=0;
-            // buscamos el registro y lo guardamos en ficherogarumparaborrar y lo marcamos para borrar
-            //IEnumerable<ficherosgarum> ficherosgarumparaborrar = BD.ficherosgarum.Where(x => x.IDFichero > id);
-            var ficherogarumparaborrar = BD.ficherosgarum.FirstOrDefault(x => x.IDFichero == id);
-            BD.ficherosgarum.Remove(ficherogarumparaborrar);
-            return BD.SaveChanges()>0;
-            // vamos a decirle que borre el registro del ficherogarumparaborrar
-            //  foreach (var item in ficherosgarumparaborrar)
-            //  {
-           // BD.ficherosgarum.Remove(item);
-            //BD.ficherosgarum.Remove(item);
-           // c = + BD.SaveChanges();
-           // }
-           // return c;
-        }*/
-
     }
 }
+ /* [HttpDelete]
+  public int Delete(int id)
+
+  {
+      //int c=0;
+      // buscamos el registro y lo guardamos en ficherogarumparaborrar y lo marcamos para borrar
+      //IEnumerable<ficherosgarum> ficherosgarumparaborrar = BD.ficherosgarum.Where(x => x.IDFichero > id);
+      var ficherogarumparaborrar = BD.ficherosgarum.FirstOrDefault(x => x.IDFichero == id);
+      BD.ficherosgarum.Remove(ficherogarumparaborrar);
+      return BD.SaveChanges()>0;
+      // vamos a decirle que borre el registro del ficherogarumparaborrar
+      //  foreach (var item in ficherosgarumparaborrar)
+      //  {
+     // BD.ficherosgarum.Remove(item);
+      //BD.ficherosgarum.Remove(item);
+     // c = + BD.SaveChanges();
+     // }
+     // return c;
+  }*/
+

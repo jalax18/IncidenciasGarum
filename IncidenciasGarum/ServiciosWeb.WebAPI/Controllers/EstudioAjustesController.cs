@@ -1,4 +1,4 @@
-﻿using ServiciosWeb.Datos;
+﻿using ServicioWeb.Datos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,11 @@ namespace ServiciosWeb.WebAPI.Controllers
 {
     public class EstudioAjustesController : ApiController
     {
+
         // conectamos a la base de datos y la referenciamos en un elemento llamado BD
 
-        IncidenciasGarumconnection BD = new IncidenciasGarumconnection();
+
+        IncidenciasGarumConnectionEntities BD = new IncidenciasGarumConnectionEntities();
         
         // este ficherosgarum lo coge del proyecto serviciosweb.Datos la tabla ficherosgarum
         [HttpGet]
@@ -64,6 +66,10 @@ namespace ServiciosWeb.WebAPI.Controllers
             estudioajustesactualizar.Fecha_Ajustes = estudioAjustes.Fecha_Ajustes;
             estudioajustesactualizar.Nombre_Estacion = estudioAjustes.Nombre_Estacion;
             estudioajustesactualizar.Diferencia = estudioAjustes.Diferencia;
+            estudioajustesactualizar.Contador_inicial = estudioAjustes.Contador_inicial;
+            estudioajustesactualizar.Contador_Final = estudioAjustes.Contador_Final;
+            estudioajustesactualizar.Tipo_contador_inicial = estudioAjustes.Tipo_contador_inicial;
+            estudioajustesactualizar.Tipo_contador_Final = estudioAjustes.Tipo_contador_Final;
 
             return BD.SaveChanges() > 0;
 
@@ -85,7 +91,7 @@ namespace ServiciosWeb.WebAPI.Controllers
 
        
 
-
+    
 
 
     }

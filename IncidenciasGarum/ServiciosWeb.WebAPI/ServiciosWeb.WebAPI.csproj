@@ -214,7 +214,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -263,9 +265,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiciosWeb.Datos\ServiciosWeb.Datos.csproj">
-      <Project>{fba72c01-1f32-47fd-afb3-6e7dab880726}</Project>
-      <Name>ServiciosWeb.Datos</Name>
+    <ProjectReference Include="..\ServicioWeb.Datos\ServicioWeb.Datos.csproj">
+      <Project>{f6266401-318f-4ba8-8d29-526f4ee98e08}</Project>
+      <Name>ServicioWeb.Datos</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

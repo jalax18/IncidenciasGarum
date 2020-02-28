@@ -93,11 +93,5 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ServiciosWeb.Datos\ServiciosWeb.Datos.csproj">
-      <Project>{fba72c01-1f32-47fd-afb3-6e7dab880726}</Project>
-      <Name>ServiciosWeb.Datos</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
