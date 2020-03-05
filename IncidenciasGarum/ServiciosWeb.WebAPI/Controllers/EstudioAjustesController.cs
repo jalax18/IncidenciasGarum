@@ -14,7 +14,7 @@ namespace ServiciosWeb.WebAPI.Controllers
         // conectamos a la base de datos y la referenciamos en un elemento llamado BD
 
 
-        IncidenciasGarumConnectionEntities BD = new IncidenciasGarumConnectionEntities();
+        ConnectionBD BD = new ConnectionBD();
         
         // este ficherosgarum lo coge del proyecto serviciosweb.Datos la tabla ficherosgarum
         [HttpGet]

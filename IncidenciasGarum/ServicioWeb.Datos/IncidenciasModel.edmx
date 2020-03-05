@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="IncidenciasGarumModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EstacionesOnlineFG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="255" />
+          <Property Name="UltimaConexion" Type="datetime" />
+        </EntityType>
         <EntityType Name="EstudioAjustes">
           <Key>
             <PropertyRef Name="id_ajuste" />
@@ -22,6 +30,7 @@
           <Property Name="Contador_Final" Type="decimal" Precision="18" Scale="3" />
           <Property Name="Tipo_contador_inicial" Type="varchar" MaxLength="1" />
           <Property Name="Tipo_contador_Final" Type="varchar" MaxLength="1" />
+          <Property Name="revisado" Type="bit" />
         </EntityType>
         <EntityType Name="ficherosgarum">
           <Key>
@@ -35,6 +44,7 @@
           <Property Name="TPV" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityContainer Name="IncidenciasGarumModelStoreContainer">
+          <EntitySet Name="EstacionesOnlineFG" EntityType="Self.EstacionesOnlineFG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstudioAjustes" EntityType="Self.EstudioAjustes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ficherosgarum" EntityType="Self.ficherosgarum" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -43,6 +53,14 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="IncidenciasGarumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EstacionesOnlineFG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UltimaConexion" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="EstudioAjustes">
           <Key>
             <PropertyRef Name="id_ajuste" />
@@ -60,6 +78,7 @@
           <Property Name="Contador_Final" Type="Decimal" Precision="18" Scale="3" />
           <Property Name="Tipo_contador_inicial" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Tipo_contador_Final" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="revisado" Type="Boolean" />
         </EntityType>
         <EntityType Name="ficherosgarum">
           <Key>
@@ -72,7 +91,8 @@
           <Property Name="Nombre_Fichero" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="TPV" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityContainer Name="IncidenciasGarumConnectionEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ConnectionBD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EstacionesOnlineFG" EntityType="Self.EstacionesOnlineFG" />
           <EntitySet Name="EstudioAjustes" EntityType="Self.EstudioAjustes" />
           <EntitySet Name="ficherosgarum" EntityType="Self.ficherosgarum" />
         </EntityContainer>
@@ -81,7 +101,16 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="IncidenciasGarumModelStoreContainer" CdmEntityContainer="IncidenciasGarumConnectionEntities">
+        <EntityContainerMapping StorageEntityContainer="IncidenciasGarumModelStoreContainer" CdmEntityContainer="ConnectionBD">
+          <EntitySetMapping Name="EstacionesOnlineFG">
+            <EntityTypeMapping TypeName="IncidenciasGarumModel.EstacionesOnlineFG">
+              <MappingFragment StoreEntitySet="EstacionesOnlineFG">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="UltimaConexion" ColumnName="UltimaConexion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="EstudioAjustes">
             <EntityTypeMapping TypeName="IncidenciasGarumModel.EstudioAjustes">
               <MappingFragment StoreEntitySet="EstudioAjustes">
@@ -98,6 +127,7 @@
                 <ScalarProperty Name="Contador_Final" ColumnName="Contador_Final" />
                 <ScalarProperty Name="Tipo_contador_inicial" ColumnName="Tipo_contador_inicial" />
                 <ScalarProperty Name="Tipo_contador_Final" ColumnName="Tipo_contador_Final" />
+                <ScalarProperty Name="revisado" ColumnName="revisado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

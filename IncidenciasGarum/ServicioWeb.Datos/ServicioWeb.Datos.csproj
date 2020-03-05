@@ -53,26 +53,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EstacionesOnlineFG.cs">
+      <DependentUpon>IncidenciasModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EstudioAjustes.cs">
-      <DependentUpon>IncidenciasGarumModel.tt</DependentUpon>
+      <DependentUpon>IncidenciasModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ficherosgarum.cs">
-      <DependentUpon>IncidenciasGarumModel.tt</DependentUpon>
+      <DependentUpon>IncidenciasModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="IncidenciasGarumModel.Context.cs">
+    <Compile Include="IncidenciasModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IncidenciasGarumModel.Context.tt</DependentUpon>
+      <DependentUpon>IncidenciasModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="IncidenciasGarumModel.cs">
+    <Compile Include="IncidenciasModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IncidenciasGarumModel.tt</DependentUpon>
+      <DependentUpon>IncidenciasModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="IncidenciasGarumModel.Designer.cs">
+    <Compile Include="IncidenciasModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IncidenciasGarumModel.edmx</DependentUpon>
+      <DependentUpon>IncidenciasModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,12 +83,12 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="IncidenciasGarumModel.edmx">
+    <EntityDeploy Include="IncidenciasModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IncidenciasGarumModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>IncidenciasModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="IncidenciasGarumModel.edmx.diagram">
-      <DependentUpon>IncidenciasGarumModel.edmx</DependentUpon>
+    <None Include="IncidenciasModel.edmx.diagram">
+      <DependentUpon>IncidenciasModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -93,15 +96,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="IncidenciasGarumModel.Context.tt">
+    <Content Include="IncidenciasModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IncidenciasGarumModel.edmx</DependentUpon>
-      <LastGenOutput>IncidenciasGarumModel.Context.cs</LastGenOutput>
+      <DependentUpon>IncidenciasModel.edmx</DependentUpon>
+      <LastGenOutput>IncidenciasModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="IncidenciasGarumModel.tt">
+    <Content Include="IncidenciasModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IncidenciasGarumModel.edmx</DependentUpon>
-      <LastGenOutput>IncidenciasGarumModel.cs</LastGenOutput>
+      <DependentUpon>IncidenciasModel.edmx</DependentUpon>
+      <LastGenOutput>IncidenciasModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

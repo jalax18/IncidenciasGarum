@@ -13,10 +13,10 @@ namespace ServicioWeb.Datos
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class IncidenciasGarumConnectionEntities : DbContext
+    public partial class ConnectionBD : DbContext
     {
-        public IncidenciasGarumConnectionEntities()
-            : base("name=IncidenciasGarumConnectionEntities")
+        public ConnectionBD()
+            : base("name=ConnectionBD")
         {
         }
     
@@ -25,6 +25,7 @@ namespace ServicioWeb.Datos
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<EstacionesOnlineFG> EstacionesOnlineFG { get; set; }
         public virtual DbSet<EstudioAjustes> EstudioAjustes { get; set; }
         public virtual DbSet<ficherosgarum> ficherosgarum { get; set; }
     }

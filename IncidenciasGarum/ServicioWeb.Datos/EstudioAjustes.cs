@@ -27,5 +27,6 @@ namespace ServicioWeb.Datos
         public Nullable<decimal> Contador_Final { get; set; }
         public string Tipo_contador_inicial { get; set; }
         public string Tipo_contador_Final { get; set; }
+        public Nullable<bool> revisado { get; set; }
     }
 }
